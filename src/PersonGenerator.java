@@ -1,9 +1,12 @@
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import static java.nio.file.StandardOpenOption.CREATE;
 
 public class PersonGenerator {
     public static void main(String[] args)
@@ -38,18 +41,25 @@ public class PersonGenerator {
 
         }while(!doneInput);
 
-        try {
-            OutputStream out = new BufferedOutputStream(Files.newOutputStream(file, StandardOpenOption.CREATE));
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out));
+        File workingDirectory = new File(System.getProperty("user.dir"));
+        Path file = Paths.get(workingDirectory.getPath() + "\\src\\PersonTestData.txt");
 
-            for(String person : people) {
-                writer.write(people, 0, people.length());
+        try {
+            OutputStream out =
+                    new BufferedOutputStream(Files.newOutputStream(file, CREATE));
+            BufferedWriter writer =
+                    new BufferedWriter(new OutputStreamWriter(out));
+
+            for(String person : people)
+            {
+                writer.write(person, 0, person.length());
                 writer.newLine();
             }
 
             writer.close();
             System.out.println("Data file written!");
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
 
