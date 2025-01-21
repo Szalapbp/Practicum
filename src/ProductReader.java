@@ -19,8 +19,8 @@ public class ProductReader
 
         final int FIELDS_LENGTH = 5;
 
-        String id, firstName, lastName, title;
-        int YOB;
+        String id, name, description;
+        double cost;
 
         try
         {
@@ -58,11 +58,10 @@ public class ProductReader
                     if(fields.length == FIELDS_LENGTH)
                     {
                         id = fields[0].trim();
-                        firstName = fields[0].trim();
-                        lastName = fields[0].trim();
-                        title = fields[0].trim();
-                        YOB = Integer.parseInt(fields[4].trim());
-                        System.out.printf("\n%-8s%-25s%-25s%-6s%6d", id, firstName, lastName, title, YOB);
+                        name = fields[0].trim();
+                        description = fields[0].trim();
+                        cost = Double.parseDouble(fields[4].trim());
+                        System.out.printf("\n%-8s%-25s%-25s%-6s%6d", id, name, description, cost);
                     }
                     else{
                         System.out.println("Found a record that may be corrupt");
